@@ -7,7 +7,7 @@ function Profil() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem("userData"));
+    const userData = JSON.parse(sessionStorage.getItem("userData"));
     if (!userData) return;
 
     axios

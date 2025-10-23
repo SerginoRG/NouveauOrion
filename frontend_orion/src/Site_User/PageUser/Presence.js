@@ -4,22 +4,24 @@ import Swal from "sweetalert2";
 import "../../StyleCss/Presence.css";
 
 function Presence() {
-  const userData = JSON.parse(localStorage.getItem("userData"));
+  // ✅ Récupération depuis sessionStorage comme les autres composants
+  const userData = JSON.parse(sessionStorage.getItem("userData"));
+
   const [isArrivee, setIsArrivee] = useState(
-    JSON.parse(localStorage.getItem("isArrivee")) ?? true
+    JSON.parse(sessionStorage.getItem("isArrivee")) ?? true
   );
 
-  const employeId =
-    userData?.id_employe || userData?.id || userData?.employe_id;
+  // ✅ Utilisation du bon identifiant employé
+  const employeId = userData?.id;
 
-  // ✅ Vérifie la date du jour et restaure l’état du bouton
+  // Vérifie la date du jour et restaure l’état du bouton
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
-    const savedDate = localStorage.getItem("presenceDate");
+    const savedDate = sessionStorage.getItem("presenceDate");
 
     if (savedDate !== today) {
-      localStorage.removeItem("isArrivee");
-      localStorage.setItem("presenceDate", today);
+      sessionStorage.removeItem("isArrivee");
+      sessionStorage.setItem("presenceDate", today);
       setIsArrivee(true);
     }
   }, []);
@@ -34,11 +36,16 @@ function Presence() {
       await axios.post("http://127.0.0.1:8000/api/presence/arrivee", {
         employe_id: employeId,
       });
+
       Swal.fire("✅", "Arrivée enregistrée avec succès !", "success");
       setIsArrivee(false);
-      localStorage.setItem("isArrivee", false);
+      sessionStorage.setItem("isArrivee", false);
     } catch (err) {
-      Swal.fire("⚠️", err.response?.data?.message || "Erreur serveur", "warning");
+      Swal.fire(
+        "⚠️",
+        err.response?.data?.message || "Erreur serveur",
+        "warning"
+      );
     }
   };
 
@@ -52,11 +59,16 @@ function Presence() {
       await axios.post("http://127.0.0.1:8000/api/presence/depart", {
         employe_id: employeId,
       });
+
       Swal.fire("👋", "Départ enregistré avec succès !", "success");
       setIsArrivee(true);
-      localStorage.setItem("isArrivee", true);
+      sessionStorage.setItem("isArrivee", true);
     } catch (err) {
-      Swal.fire("⚠️", err.response?.data?.message || "Erreur serveur", "warning");
+      Swal.fire(
+        "⚠️",
+        err.response?.data?.message || "Erreur serveur",
+        "warning"
+      );
     }
   };
 

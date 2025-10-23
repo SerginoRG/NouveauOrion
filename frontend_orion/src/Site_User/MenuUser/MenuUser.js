@@ -1,4 +1,3 @@
-// src/Site_User/MenuUser/MenuUser.js
 import React, { useState, useEffect } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -19,7 +18,8 @@ function MenuUser() {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("userData"));
+    // ✅ Récupération depuis sessionStorage (et non localStorage)
+    const data = JSON.parse(sessionStorage.getItem("userData"));
     if (!data) {
       navigate("/"); // redirection si non connecté
     } else {
@@ -43,7 +43,8 @@ function MenuUser() {
       cancelButtonText: "Non",
     }).then((result) => {
       if (result.isConfirmed) {
-        localStorage.removeItem("userData");
+        // ✅ Nettoyer sessionStorage
+        sessionStorage.removeItem("userData");
         navigate("/");
       }
     });

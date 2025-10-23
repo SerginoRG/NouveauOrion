@@ -162,12 +162,12 @@ export default function Service() {
                     value={descriptionService}
                     onChange={(e) => {
                       const words = e.target.value.trim().split(/\s+/); // découpe en mots
-                      if (words.length <= 5) {
+                      if (words.length <= 10) {
                         setDescriptionService(e.target.value);
                       } else {
                         Swal.fire(
                           "Limite atteinte",
-                          "La description ne peut pas dépasser 5 mots.",
+                          "La description ne peut pas dépasser 10 mots.",
                           "warning"
                         );
                       }
@@ -175,7 +175,7 @@ export default function Service() {
                     required
                   />
                   <small style={{ color: "gray" }}>
-                    {descriptionService.trim().split(/\s+/).filter(Boolean).length}/5 mots
+                    {descriptionService.trim().split(/\s+/).filter(Boolean).length}/10 mots
                   </small>
                 </div>
 

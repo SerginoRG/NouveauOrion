@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import "../../StyleCss/Login.css";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function LoginUser() {
   const [nomUtilisateur, setNomUtilisateur] = useState("");
   const [passwordUtilisateur, setPasswordUtilisateur] = useState("");
   const navigate = useNavigate();
@@ -18,8 +18,8 @@ export default function Login() {
         passwordUtilisateur,
       });
 
-      // ✅ Sauvegarde des infos utilisateur dans le localStorage
-      localStorage.setItem("userData", JSON.stringify(res.data.utilisateur));
+      // ✅ Utiliser sessionStorage pour isoler les sessions par onglet
+      sessionStorage.setItem("userData", JSON.stringify(res.data.utilisateur));
 
       Swal.fire("Succès", "Connexion réussie", "success");
       navigate("/user/dashboard");
@@ -31,6 +31,11 @@ export default function Login() {
       );
     }
   };
+
+  axios.get("http://127.0.0.1:8000/api/test")
+  .then(res => console.log(res.data))
+  .catch(err => console.error(err));
+
 
   return (
     <div className="login-root">
