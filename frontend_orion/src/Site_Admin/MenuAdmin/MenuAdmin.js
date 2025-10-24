@@ -11,6 +11,8 @@ import {
   FaUserCheck,
   FaUserTimes,
   FaSignOutAlt,
+  FaMoneyBillWave,
+  FaFileInvoiceDollar,
 } from "react-icons/fa";
 import "../../StyleCss/Menu.css";
 
@@ -36,6 +38,8 @@ function MenuAdmin() {
     { path: "/admin/dashboard/contrats", label: "Contrats", icon: <FaFileContract /> },
     { path: "/admin/dashboard/presences", label: "Présences", icon: <FaUserCheck /> },
     { path: "/admin/dashboard/absences", label: "Absences", icon: <FaUserTimes /> },
+    { path: "/admin/dashboard/salaires", label: "Salaire", icon: <FaMoneyBillWave /> },
+    { path: "/admin/dashboard/bulletin", label: "Bulletin", icon: <FaFileInvoiceDollar /> },
   ];
 
   const handleLogout = () => {

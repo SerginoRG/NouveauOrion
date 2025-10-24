@@ -11,6 +11,8 @@ import Service from "./Site_Admin/PageAdmin/Service";
 import Employe from "./Site_Admin/PageAdmin/Employe";
 import Presence from "./Site_Admin/PageAdmin/Presence";
 import User from "./Site_Admin/PageAdmin/User";
+import Salaire from "./Site_Admin/PageAdmin/Salaire";
+import BulletinSalaire from "./Site_Admin/PageAdmin/BulletinSalaire";
 
 // Site Utilisateur
 import LoginUser from "./Site_User/LoginUser/LoginUser";
@@ -47,6 +49,8 @@ function App() {
           <Route path="contrats" element={<Contrat />} />
           <Route path="presences" element={<Presence />} />
           <Route path="absences" element={<Absence />} />
+          <Route path="salaires" element={< Salaire />} />
+          <Route path="bulletin" element={<BulletinSalaire/>} />
         </Route>
       </Routes>
     </Router>

@@ -9,6 +9,8 @@ use App\Http\Controllers\ContratController;
 use App\Http\Controllers\UtilisateurController;
 use App\Http\Controllers\PresenceController;
 use App\Http\Controllers\AbsenceController;
+use App\Http\Controllers\SalaireController;
+use App\Http\Controllers\BulletinController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,3 +81,28 @@ Route::get('/presence/historique/{employe_id}', [PresenceController::class, 'his
 
 Route::post('/absences', [AbsenceController::class, 'store']); // Ajouter une demande
 Route::get('/absences/employe/{id}', [AbsenceController::class, 'showByEmploye']); // Voir les absences par employé
+
+
+
+Route::get('/admin/presences', [PresenceController::class, 'index']);
+
+
+
+// AVANT les autres routes de salaires (important pour l'ordre)
+Route::post('/salaires/calculer-retenues-preview', [SalaireController::class, 'calculerRetenuesPreview']);
+
+// Puis les routes normales
+Route::get('/salaires', [SalaireController::class, 'index']);
+Route::post('/salaires', [SalaireController::class, 'store']);
+Route::get('/salaires/{id}', [SalaireController::class, 'show']);
+Route::put('/salaires/{id}', [SalaireController::class, 'update']);
+Route::delete('/salaires/{id}', [SalaireController::class, 'destroy']);
+
+
+Route::prefix('bulletins')->group(function () {
+    Route::get('/', [BulletinController::class, 'index']);
+    Route::post('/', [BulletinController::class, 'store']);
+    Route::post('/{id}/update-pdf', [BulletinController::class, 'update']);
+    Route::get('/{id}/generate-pdf', [BulletinController::class, 'genererPDF']);
+    Route::delete('/{id}', [BulletinController::class, 'destroy']);
+});

@@ -105,4 +105,19 @@ $request->validate([
 
         return response()->json($presences);
     }
+
+    // app/Http/Controllers/PresenceController.php
+
+  // Afficher toutes les présences (pour l'admin)
+    public function index()
+    {
+        $presences = Presence::with('employe')
+            ->orderBy('date_presence', 'desc')
+            ->get();
+
+        return response()->json($presences);
+    }
+
+
+
 }

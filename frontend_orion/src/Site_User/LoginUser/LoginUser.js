@@ -21,7 +21,7 @@ export default function LoginUser() {
       // ✅ Utiliser sessionStorage pour isoler les sessions par onglet
       sessionStorage.setItem("userData", JSON.stringify(res.data.utilisateur));
 
-      Swal.fire("Succès", "Connexion réussie", "success");
+     // Swal.fire("Succès", "Connexion réussie", "success");
       navigate("/user/dashboard");
     } catch (err) {
       Swal.fire(
